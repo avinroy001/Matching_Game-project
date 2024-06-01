@@ -18,14 +18,25 @@ import OrgRect from "../../assets/Rectangle2.png";
 import Three from "../../assets/three.png";
 import Spot1 from "../../assets/spot1.png";
 import Spot2 from "../../assets/spot2.png";
+import sound2 from "../../assets/sound2.wav";
+import sound1 from "../../assets/sound1.mp3";
 
 const Instruction = () => {
   const nav = useNavigate();
 
+  function play2(){
+    new Audio(sound2).play();
+  }
+  function play(){
+    new Audio(sound1).play();
+  }
+
   const handleClick = () => {
+    play2();
     nav("/question");
   };
   const handleNav = () => {
+    play();
     nav("/activity");
   };
   return (

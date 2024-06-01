@@ -8,17 +8,12 @@ import Setting from "../../assets/setting.png";
 import { useNavigate } from "react-router-dom";
 import sound1 from "../../assets/sound1.mp3";
 const LandingPage = () => {
-  const [isPlay,setIsPlay] = useState(false);
-  const audioRef =useRef(null);
   const nav = useNavigate();
+  function play(){
+    new Audio(sound1).play();
+  }
   const handleClick = () => {
-    const preValue=isPlay;
-    setIsPlay(!preValue);
-    if(!preValue){
-      audioRef.current.play()
-    }else{
-      audioRef.current.pause()
-    }
+    play()
     nav("/intro");
 
   };
@@ -40,7 +35,7 @@ const LandingPage = () => {
       <div className={styles.setting}>
         <img src={Setting} alt="setting" />
       </div>
-      <audio ref={audioRef}><source src={sound1} type="audio/mp3"/></audio>
+      
     </div>
   );
 };

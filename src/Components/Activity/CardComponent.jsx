@@ -14,7 +14,25 @@ import cloud from "../../assets/cloud.png";
 import Match from "./Match";
 import Finish from "./Finish";
 import { useNavigate } from "react-router-dom";
+import sound1 from "../../assets/sound1.mp3";
+import matchSound from "../../assets/matchSound.wav";
+import loose from "../../assets/loose.wav";
+import win from "../../assets/win.wav";
 const CardComponent = ({ count, setCount }) => {
+
+  function play(){
+    new Audio(sound1).play();
+  }
+  function play3(){
+    new Audio(matchSound).play();
+  }
+  function play4(){
+    new Audio(loose).play();
+  }
+  function play5(){
+    new Audio(win).play();
+  }
+
   const [pinkCards, setPinkCards] = useState([
     { id: 1, back: Apple, flipped: false },
     { id: 2, back: Orange, flipped: false },
@@ -43,6 +61,7 @@ const CardComponent = ({ count, setCount }) => {
   const nav=useNavigate();
 
   const handleClick = (id, cardSet, setCardSet) => {
+    play();
     setOne(one+1);
     console.log(id);
     setHints1(false);
@@ -67,6 +86,7 @@ const CardComponent = ({ count, setCount }) => {
   useEffect(() => {
     setTimeout(() => {
       if (v1 === v2 - 6 && v1 !== 0 && v2 !== 0) {
+        play3();
         setPinkCards((prevCards) =>
           prevCards.map((card) =>
             card.id === v1 || card.id === v2
@@ -90,6 +110,7 @@ const CardComponent = ({ count, setCount }) => {
       }else if(v1!==v2 && v1!==0 && v2!==0){
         
         if(wrong===0){
+          play4();
           nav("/instruction")
         }
          
@@ -100,6 +121,7 @@ const CardComponent = ({ count, setCount }) => {
   }, [v1, v2]);
   useEffect(()=>{
     if (count === 100) {
+      play5();
       setMatch(false);
     }
   }, [count, setMatch]

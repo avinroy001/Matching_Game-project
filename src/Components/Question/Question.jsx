@@ -7,15 +7,26 @@ import Cloud from "../../assets/cloud.png";
 import { useNavigate } from "react-router-dom";
 import progress from "../../assets/progress.png";
 import Banana from "../../assets/disableB.png";
+import sound2 from "../../assets/sound2.wav";
+import sound1 from "../../assets/sound1.mp3";
 
 const Question = () => {
   const nav = useNavigate();
 
+  function play2(){
+    new Audio(sound2).play();
+  }
+  function play(){
+    new Audio(sound1).play();
+  }
+
   const handleClick = () => {
+    play2();
     nav("/intro");
   };
 
   const handleNav = () => {
+    play();
     nav("/instruction");
   };
   return (

@@ -6,9 +6,16 @@ import ftop from "../../assets/ftop.png";
 import banana from "../../assets/banana.png";
 import styles from "./Finish.module.css"
 import { useNavigate } from 'react-router-dom';
+import sound2 from "../../assets/sound2.wav";
+
 const Finish = () => {
+    function play2(){
+        new Audio(sound2).play();
+      }
+
     const nav=useNavigate()
     const handleClick=()=>{
+        play2();
         nav("/instruction");
     }
   return (

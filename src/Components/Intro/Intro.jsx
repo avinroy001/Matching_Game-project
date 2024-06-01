@@ -8,16 +8,24 @@ import Star from "../../assets/Star.png";
 import Setting from "../../assets/setting.png";
 import banana from "../../assets/banana.png";
 import { useNavigate } from "react-router-dom";
-
-
+import sound2 from "../../assets/sound2.wav";
+import sound1 from "../../assets/sound1.mp3";
 const Intro = () => {
+
+  function play2(){
+    new Audio(sound2).play();
+  }
+  function play(){
+    new Audio(sound1).play();
+  }
  
   const nav = useNavigate();
   const handleClick = () => {
+    play2()
     nav("/");
   };
   const handleNav = () => {
-   
+    play()
     nav("/question");
 
   };
