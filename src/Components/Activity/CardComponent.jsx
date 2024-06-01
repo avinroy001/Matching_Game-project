@@ -13,6 +13,7 @@ import hint2 from "../../assets/hint2.png";
 import cloud from "../../assets/cloud.png";
 import Match from "./Match";
 import Finish from "./Finish";
+import { useNavigate } from "react-router-dom";
 const CardComponent = ({ count, setCount }) => {
   const [pinkCards, setPinkCards] = useState([
     { id: 1, back: Apple, flipped: false },
@@ -24,12 +25,12 @@ const CardComponent = ({ count, setCount }) => {
   ]);
 
   const [blueCards, setBlueCards] = useState([
+    { id: 12, back: Mango, flipped: false },
     { id: 7, back: Apple, flipped: false },
-    { id: 8, back: Orange, flipped: false },
+    { id: 11, back: Grape, flipped: false },
     { id: 9, back: Banana, flipped: false },
     { id: 10, back: Kiwi, flipped: false },
-    { id: 11, back: Grape, flipped: false },
-    { id: 12, back: Mango, flipped: false },
+    { id: 8, back: Orange, flipped: false },
   ]);
   const [v1, setV1] = useState(0);
   const [v2, setV2] = useState(0);
@@ -37,8 +38,8 @@ const CardComponent = ({ count, setCount }) => {
   const [hints2, setHints2] = useState(false);
   const [match, setMatch] = useState(false);
   const [data, setData] = useState({});
-  const [isFinish, setIsFinish] = useState(false);
-  
+  const [wrong, setWrong] = useState(7);
+  const nav=useNavigate();
 
   const handleClick = (id, cardSet, setCardSet) => {
     console.log(id);
@@ -83,6 +84,13 @@ const CardComponent = ({ count, setCount }) => {
         setMatch(true);
         setData(pinkCards.find(ele=>ele.id===v1))
        
+      }else{
+        
+        if(wrong===0){
+          nav("/instruction")
+        }else{
+          setWrong(wrong-1);
+        }
       }
     }, 500);
   }, [v1, v2]);
@@ -101,7 +109,7 @@ const CardComponent = ({ count, setCount }) => {
         <img src={hint1} alt="hint1" className={styles.hint1}/>
         <img src={cloud} alt="cloud" className={styles.cloud}/>
         <p className={styles.intro}>Select a card</p></>):""}
-       
+        <div className={styles.wrong}><p>Wrong move left :{wrong}</p></div>
         {pinkCards.map((card) => (
           <div
             className={`${styles.card} ${
