@@ -12,6 +12,7 @@ import hint1 from "../../assets/hint1.png";
 import hint2 from "../../assets/hint2.png";
 import cloud from "../../assets/cloud.png";
 import Match from "./Match";
+import Finish from "./Finish";
 const CardComponent = ({ count, setCount }) => {
   const [pinkCards, setPinkCards] = useState([
     { id: 1, back: Apple, flipped: false },
@@ -36,6 +37,7 @@ const CardComponent = ({ count, setCount }) => {
   const [hints2, setHints2] = useState(false);
   const [match, setMatch] = useState(false);
   const [data, setData] = useState({});
+  const [isFinish, setIsFinish] = useState(false);
   
 
   const handleClick = (id, cardSet, setCardSet) => {
@@ -76,13 +78,21 @@ const CardComponent = ({ count, setCount }) => {
               : card
           )
         );
+       
         setCount(count + 15);
         setMatch(true);
         setData(pinkCards.find(ele=>ele.id===v1))
+       
       }
     }, 500);
   }, [v1, v2]);
-  
+  useEffect(()=>{
+    if (count === 100) {
+      setMatch(false);
+    }
+  }, [count, setMatch]
+  )
+  console.log(count)
 
   return (
     <div className={styles.wrapper}>
@@ -140,6 +150,7 @@ const CardComponent = ({ count, setCount }) => {
         ))}
       </div>
       {match?(<div className={styles.match}><Match match={match} setMatch={setMatch} data={data}/></div>):""}
+      {count === 100 ? <div className={styles.match}><Finish /></div> : null}
     </div>
 
   );

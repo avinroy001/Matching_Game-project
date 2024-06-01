@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BackBtn from "../../assets/back.png";
 import styles from "./Intro.module.css";
 import Monkey from "../../assets/monkey.png";
@@ -8,14 +8,19 @@ import Star from "../../assets/Star.png";
 import Setting from "../../assets/setting.png";
 import banana from "../../assets/banana.png";
 import { useNavigate } from "react-router-dom";
+import Sound from "react-sound";
+import Track from "../../assets/sound1.wav";
 
 const Intro = () => {
+  const [isPlaying,setIsPlaying]=useState(false);
   const nav = useNavigate();
   const handleClick = () => {
     nav("/");
   };
   const handleNav = () => {
+    setIsPlaying(true);
     nav("/question");
+
   };
   return (
     <div>
@@ -41,6 +46,11 @@ const Intro = () => {
       <div className={styles.setting}>
         <img src={Setting} alt="setting" />
       </div>
+      <Sound
+        url={Track}
+        playStatus={isPlaying ? Sound.status.PLAYING : Sound.status.STOPPED}
+        onFinishedPlaying={() => setIsPlaying(false)}
+      />
     </div>
   );
 };
