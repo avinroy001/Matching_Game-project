@@ -39,12 +39,14 @@ const CardComponent = ({ count, setCount }) => {
   const [match, setMatch] = useState(false);
   const [data, setData] = useState({});
   const [wrong, setWrong] = useState(7);
+  const [one,setOne]=useState(0);
   const nav=useNavigate();
 
   const handleClick = (id, cardSet, setCardSet) => {
+    setOne(one+1);
     console.log(id);
     setHints1(false);
-    if(count<=10){
+    if(one===0){
       setHints2(true);
     }
    
