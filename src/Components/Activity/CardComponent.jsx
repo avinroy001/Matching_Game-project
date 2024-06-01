@@ -44,7 +44,7 @@ const CardComponent = ({ count, setCount }) => {
   const handleClick = (id, cardSet, setCardSet) => {
     console.log(id);
     setHints1(false);
-    if(v1==0){
+    if(count<=10){
       setHints2(true);
     }
    
@@ -79,7 +79,8 @@ const CardComponent = ({ count, setCount }) => {
               : card
           )
         );
-       
+       setV1(0);
+       setV2(0);
         setCount(count + 15);
         setMatch(true);
         setData(pinkCards.find(ele=>ele.id===v1))
