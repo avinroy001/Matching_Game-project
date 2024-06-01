@@ -84,13 +84,14 @@ const CardComponent = ({ count, setCount }) => {
         setMatch(true);
         setData(pinkCards.find(ele=>ele.id===v1))
        
-      }else{
+      }else if(v1!==v2 && v1!==0 && v2!==0){
         
         if(wrong===0){
           nav("/instruction")
-        }else{
-          setWrong(wrong-1);
         }
+         
+          setWrong(wrong-1);
+        
       }
     }, 500);
   }, [v1, v2]);
